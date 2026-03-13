@@ -1,26 +1,48 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f5f7fd;
+  --foreground: #131725;
+  --surface: rgba(255, 255, 255, 0.75);
+  --surface-solid: rgba(255, 255, 255, 0.94);
+  --border: rgba(19, 23, 37, 0.12);
+  --muted: rgba(19, 23, 37, 0.72);
+  --accent: #1551d1;
+  --accent-2: #1e8a73;
+  --accent-3: #d27a26;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-sans: var(--font-bricolage);
+  --font-display: var(--font-lora);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(circle at 14% 16%, rgba(21, 81, 209, 0.12), transparent 35%),
+    radial-gradient(circle at 85% 80%, rgba(30, 138, 115, 0.12), transparent 35%),
+    var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-bricolage), sans-serif;
+  min-height: 100vh;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-lora), serif;
+}
+
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 42px rgba(15, 22, 39, 0.09);
+}
+
+.panel {
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
 }
