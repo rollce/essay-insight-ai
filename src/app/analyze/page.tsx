@@ -11,6 +11,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { useMemo, useState } from "react";
+import { analyzeEssay } from "@/lib/analyze";
 
 interface EssayAnalysis {
   overallScore: number;
@@ -78,25 +79,18 @@ export default function Home() {
   );
 
   async function handleAnalyze() {
+    const normalizedText = text.trim();
+
     setError("");
     setIsLoading(true);
-
-    const response = await fetch("/api/analyze", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text }),
-    });
-
-    const payload = await response.json();
-
-    if (!response.ok) {
+    if (normalizedText.length < 80) {
       setResult(null);
-      setError(payload.error ?? "Analysis failed. Please try again.");
+      setError("Please provide at least 80 characters for a meaningful analysis.");
       setIsLoading(false);
       return;
     }
 
-    setResult(payload.result);
+    setResult(analyzeEssay(normalizedText));
     setIsLoading(false);
   }
 
